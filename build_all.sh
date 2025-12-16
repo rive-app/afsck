@@ -3,5 +3,6 @@
 runtimes=(android ios web web-lite react react-native)
 
 for runtime in "${runtimes[@]}"; do
-    ./$runtime/build.sh
+    echo "Building $runtime..."
+    ./runtimes/$runtime/build.sh || exit 1
 done
