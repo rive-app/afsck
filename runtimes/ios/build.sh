@@ -12,7 +12,5 @@ getsize() {
     local pre_app="$SCRIPT_DIR/pre/build/demo.xcarchive/Products/Applications/demo.app"
     local post_app="$SCRIPT_DIR/post/build/demo.xcarchive/Products/Applications/demo.app"
 
-    PRE_SIZE=$(du -sk "$pre_app" | cut -f1)
-    POST_SIZE=$(du -sk "$post_app" | cut -f1)
-    SIZE_DIFF=$((POST_SIZE - PRE_SIZE))
+    compare_size "$pre_app" "$post_app"
 }
