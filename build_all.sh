@@ -25,11 +25,12 @@ build_runtime() {
     build post
     getsize
 
-    echo "$runtime: Pre=$PRE_SIZE, Post=$POST_SIZE, Diff=$SIZE_DIFF"
+    echo "$1: Pre=$PRE_SIZE, Post=$POST_SIZE, Diff=$SIZE_DIFF"
 
     cleanup
 }
 
+multiplatform_runtimes=(react-native flutter)
 build_multiplatform_runtime() {
     local runtime_dir="$ROOT_DIR/runtimes/$1"
     source "$runtime_dir/build.sh"
@@ -37,10 +38,10 @@ build_multiplatform_runtime() {
     build post
 
     getsize_ios
-    echo "iOS $runtime: Pre=$PRE_SIZE, Post=$POST_SIZE, Diff=$SIZE_DIFF"
+    echo "iOS $1: Pre=$PRE_SIZE, Post=$POST_SIZE, Diff=$SIZE_DIFF"
 
     getsize_android
-    echo "Android $runtime: Pre=$PRE_SIZE, Post=$POST_SIZE, Diff=$SIZE_DIFF"
+    echo "Android $1: Pre=$PRE_SIZE, Post=$POST_SIZE, Diff=$SIZE_DIFF"
 
     cleanup
 }
@@ -56,4 +57,7 @@ for runtime in "${runtimes[@]}"; do
     build_runtime $runtime
 done
 
-build_multiplatform_runtime react-native
+for runtime in "${multiplatform_runtimes[@]}"; do
+    echo "======== Building $runtime ========"
+    build_multiplatform_runtime $runtime
+done
