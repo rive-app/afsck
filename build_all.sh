@@ -72,5 +72,5 @@ main() {
     write_output_file
 }
 
-build_multiplatform_runtime flutter
+build_runtime web-lite
 #main

@@ -10,6 +10,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@rive-app/canvas-lite": "^2.32.2"
+    "@rive-app/canvas-lite": "file:../../../rive/packages/runtime_wasm/js/npm/canvas_lite"
   }
 }
