@@ -72,5 +72,5 @@ main() {
     write_output_file
 }
 
-build_runtime ios
+build_multiplatform_runtime flutter
 #main
