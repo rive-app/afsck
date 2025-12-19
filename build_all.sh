@@ -72,5 +72,4 @@ main() {
     write_output_file
 }
 
-build_runtime react
-#main
+main
