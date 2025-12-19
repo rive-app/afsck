@@ -72,5 +72,5 @@ main() {
     write_output_file
 }
 
-build_runtime android
+build_runtime ios
 #main

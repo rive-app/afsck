@@ -4,9 +4,12 @@
 build_ios() {
     local name="${1:-demo}"
 
-    # If there is a Podfile, use the workspace.
-    if [ -f "Podfile" ]; then
-        pod install
+    # If there is a workspace, use it.
+    if [ -d "$name.xcworkspace" ]; then
+        # Handle CocoaPods if needed.
+        if [ -f "Podfile" ]; then
+            pod install
+        fi
 
         xcodebuild archive \
             -workspace "$name.xcworkspace" \
