@@ -38,7 +38,7 @@ build_runtime() {
 build_multiplatform_runtime() {
     local runtime_dir="$ROOT_DIR/runtimes/$1"
     source "$runtime_dir/build.sh"
-    build pre
+    #build pre
     build post
 
     getsize_ios
@@ -72,5 +72,5 @@ main() {
     write_output_file
 }
 
-build_runtime web-lite
+build_multiplatform_runtime react-native
 #main

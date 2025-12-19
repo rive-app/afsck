@@ -2,7 +2,20 @@
 
 SCRIPT_DIR="$(dirname "$(realpath "$BASH_SOURCE")")"
 
+build_rive_react_native() {
+    cd "$SCRIPT_DIR/../../rive-react-native" || exit 1
+    rm -rf node_modules lib
+    yarn install
+    yarn prepare
+    cd "$SCRIPT_DIR"
+}
+
 build() {
+    # Build rive-react-native first for post
+    if [ "$1" = "post" ]; then
+        build_rive_react_native
+    fi
+
     cd "$SCRIPT_DIR/$1" || exit 1
     rm -rf node_modules dist
     rm -rf android ios
