@@ -11,6 +11,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -20,5 +21,12 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "demo"
+
 include(":app")
+
+includeBuild("../../../rive/packages/runtime_android") {
+    dependencySubstitution {
+        substitute(module("app.rive:rive-android")).using(project(":kotlin"))
+    }
+}
  

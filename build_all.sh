@@ -72,4 +72,5 @@ main() {
     write_output_file
 }
 
-main
+build_runtime android
+#main
