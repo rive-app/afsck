@@ -6,7 +6,7 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 // Force the import of the Rive React Native component.
-import '@rive-app/react-native';
+import 'rive-react-native';
 
 export const unstable_settings = {
   anchor: '(tabs)',

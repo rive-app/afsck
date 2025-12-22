@@ -1,0 +1,9 @@
+[submodule "rive"]
+	path = rive
+	url = https://github.com/rive-app/rive.git
+[submodule "rive-react"]
+	path = rive-react
+	url = https://github.com/rive-app/rive-react.git
+[submodule "rive-react-native"]
+	path = rive-react-native
+	url = https://github.com/rive-app/rive-react-native.git

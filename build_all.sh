@@ -3,10 +3,6 @@
 ROOT_DIR="$(dirname "$(realpath "$BASH_SOURCE")")"
 SCRIPTS_DIR="$ROOT_DIR/scripts"
 
-# Temporary: set the ANDROID_HOME environment variable.
-ANDROID_HOME="$HOME/Library/Android/sdk"
-export ANDROID_HOME
-
 if [ -z "$ANDROID_HOME" ]; then
     echo "ANDROID_HOME must be set to the path to the Android SDK!"
     exit 1
@@ -17,6 +13,7 @@ source "$SCRIPTS_DIR/build_android.sh"
 source "$SCRIPTS_DIR/build_ios.sh"
 source "$SCRIPTS_DIR/compare_size.sh"
 source "$SCRIPTS_DIR/output_file.sh"
+source "$SCRIPTS_DIR/submodules.sh"
 
 # Runtime build information.
 runtimes=(android ios web web-lite react)
@@ -58,19 +55,25 @@ cleanup() {
     unset SCRIPT_DIR
 }
 
-main() {
-    for runtime in "${runtimes[@]}"; do
-        echo "======== Building $runtime ========"
-        build_runtime $runtime
-    done
+echo "======== Updating submodules ========"
+update_submodules
 
-    for runtime in "${multiplatform_runtimes[@]}"; do
-        echo "======== Building $runtime ========"
-        build_multiplatform_runtime $runtime
-    done
+# If no targets are specified, build all runtimes and multiplatform runtimes.
+TARGETS=("$@")
+if [ -z "$TARGETS" ]; then
+    TARGETS=("${runtimes[@]}" "${multiplatform_runtimes[@]}")
+fi
 
-    write_output_file
-}
+for target in "${TARGETS[@]}"; do
+    echo "======== Building $target ========"
+    if [[ "${runtimes[@]}" =~ "$target" ]]; then
+        build_runtime "$target"
+    elif [[ "${multiplatform_runtimes[@]}" =~ "$target" ]]; then
+        build_multiplatform_runtime "$target"
+    else
+        echo "Unknown target: $target"
+        exit 1
+    fi
+done
 
-build_runtime ios
-#main
+write_output_file
