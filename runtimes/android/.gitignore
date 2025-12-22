@@ -32,9 +32,3 @@ google-services.json
 
 # Android Profiling
 *.hprof
-
-# Cloned rive-android repo (built from source)
-rive-android/
-
-# Locally built AAR
-post/libs/
