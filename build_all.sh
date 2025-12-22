@@ -55,21 +55,25 @@ cleanup() {
     unset SCRIPT_DIR
 }
 
-main() {
-    echo "======== Updating submodules ========"
-    update_submodules
+echo "======== Updating submodules ========"
+update_submodules
 
-    for runtime in "${runtimes[@]}"; do
-        echo "======== Building $runtime ========"
-        build_runtime $runtime
-    done
+# If no targets are specified, build all runtimes and multiplatform runtimes.
+TARGETS=("$@")
+if [ -z "$TARGETS" ]; then
+    TARGETS=("${runtimes[@]}" "${multiplatform_runtimes[@]}")
+fi
 
-    for runtime in "${multiplatform_runtimes[@]}"; do
-        echo "======== Building $runtime ========"
-        build_multiplatform_runtime $runtime
-    done
+for target in "${TARGETS[@]}"; do
+    echo "======== Building $target ========"
+    if [[ "${runtimes[@]}" =~ "$target" ]]; then
+        build_runtime "$target"
+    elif [[ "${multiplatform_runtimes[@]}" =~ "$target" ]]; then
+        build_multiplatform_runtime "$target"
+    else
+        echo "Unknown target: $target"
+        exit 1
+    fi
+done
 
-    write_output_file
-}
-
-main
+write_output_file
