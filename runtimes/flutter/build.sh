@@ -3,7 +3,7 @@
 SCRIPT_DIR="$(dirname "$(realpath "$BASH_SOURCE")")"
 
 build() {
-    cd "$SCRIPT_DIR/$1" || exit 1
+    pushd "$SCRIPT_DIR/$1" > /dev/null || exit 1
     
     flutter clean
     flutter pub get
@@ -11,7 +11,7 @@ build() {
     flutter build ios --no-codesign
     flutter build apk
 
-    cd "$SCRIPT_DIR"
+    popd > /dev/null
 }
 
 getsize_ios() {

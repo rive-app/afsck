@@ -3,9 +3,9 @@
 SCRIPT_DIR="$(dirname "$(realpath "$BASH_SOURCE")")"
 
 build() {
-    cd "$SCRIPT_DIR/$1" || exit 1
+    pushd "$SCRIPT_DIR/$1" > /dev/null || exit 1
     build_android
-    cd "$SCRIPT_DIR"
+    popd > /dev/null
 }
 
 getsize() {

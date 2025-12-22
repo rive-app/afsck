@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "@rive-app/react-canvas": "^4.24.0",
+    "@rive-app/react-canvas": "file:../../../rive-react/npm/react-canvas",
     "next": "16.0.10",
     "react": "19.2.1",
     "react-dom": "19.2.1"

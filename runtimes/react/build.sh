@@ -2,12 +2,29 @@
 
 SCRIPT_DIR="$(dirname "$(realpath "$BASH_SOURCE")")"
 
-build() {
-    cd "$SCRIPT_DIR/$1" || exit 1
+# Build the rive-react dependencies.
+build_rive_react() {
+    pushd "$SCRIPT_DIR/../../rive-react" > /dev/null || exit 1
     rm -rf node_modules
     npm install
     npm run build
-    cd "$SCRIPT_DIR"
+    npm run setup-builds
+    popd > /dev/null
+}
+
+build() {
+    # Build rive-react first for post
+    if [[ "$1" == "post" ]]; then
+        build_rive_react
+    fi
+
+    pushd "$SCRIPT_DIR/$1" > /dev/null || exit 1
+
+    rm -rf node_modules
+    npm install
+    npm run build
+
+    popd > /dev/null
 }
 
 getsize() {
