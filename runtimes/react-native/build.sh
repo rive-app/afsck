@@ -35,15 +35,21 @@ build() {
 }
 
 getsize_ios() {
+    local runtime="$1"
+    local platform="$2"
     local pre_app="$SCRIPT_DIR/pre/ios/build/demo.xcarchive/Products/Applications/demo.app"
     local post_app="$SCRIPT_DIR/post/ios/build/demo.xcarchive/Products/Applications/demo.app"
     
     compare_size "$pre_app" "$post_app"
+    record_size "$runtime" "$platform" ""
 }
 
 getsize_android() {
+    local runtime="$1"
+    local platform="$2"
     local pre_app="$SCRIPT_DIR/pre/android/app/build/outputs/apk/release/app-release.apk"
     local post_app="$SCRIPT_DIR/post/android/app/build/outputs/apk/release/app-release.apk"
     
     compare_size "$pre_app" "$post_app"
+    record_size "$runtime" "$platform" ""
 }

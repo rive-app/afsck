@@ -24,10 +24,9 @@ build_runtime() {
     source "$runtime_dir/build.sh"
     build pre
     build post
-    getsize
 
-    echo "$1: Pre=$PRE_SIZE, Post=$POST_SIZE, Diff=$SIZE_DIFF"
-    record_size "$1" "$1"
+    # getsize now handles recording internally
+    getsize "$1" "$1"
 
     cleanup
 }
@@ -38,13 +37,9 @@ build_multiplatform_runtime() {
     build pre
     build post
 
-    getsize_ios
-    echo "iOS $1: Pre=$PRE_SIZE, Post=$POST_SIZE, Diff=$SIZE_DIFF"
-    record_size "$1" "ios"
-
-    getsize_android
-    echo "Android $1: Pre=$PRE_SIZE, Post=$POST_SIZE, Diff=$SIZE_DIFF"
-    record_size "$1" "android"
+    # getsize_* now handle recording internally
+    getsize_ios "$1" "ios"
+    getsize_android "$1" "android"
 
     cleanup
 }
