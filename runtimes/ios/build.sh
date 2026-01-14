@@ -24,13 +24,28 @@ build() {
     popd > /dev/null
 }
 
+get_from_thinning_report() {
+    local build_type="$1"
+    local key="$2"
+
+    local thinning_report="$SCRIPT_DIR/$build_type/release/demo/app-thinning.plist"
+
+    cat "$thinning_report" | grep "<key>$key</key>" -A 1 | awk 'NR==2' | cut -d ">" -f2 | cut -d "<" -f1
+}
+
 getsize() {
     local runtime="$1"
     local platform="$2"
-    local pre_app="$SCRIPT_DIR/pre/build/demo.xcarchive/Products/Applications/demo.app"
-    local post_app="$SCRIPT_DIR/post/build/demo.xcarchive/Products/Applications/demo.app"
 
-    # Uncompressed size
-    compare_size "$pre_app" "$post_app"
-    record_size "$runtime" "$platform" ""
+    local pre_size=$(get_from_thinning_report "pre" "sizeUncompressedApp")
+    local post_size=$(get_from_thinning_report "post" "sizeUncompressedApp")
+
+    compare_size_raw "$pre_size" "$post_size"
+    record_size "$runtime" "$platform" "uncompressed"
+
+    pre_size=$(get_from_thinning_report "pre" "sizeCompressedApp")
+    post_size=$(get_from_thinning_report "post" "sizeCompressedApp")
+
+    compare_size_raw "$pre_size" "$post_size"
+    record_size "$runtime" "$platform" "compressed"
 }
