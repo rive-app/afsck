@@ -28,8 +28,11 @@ build() {
 }
 
 getsize() {
+    local runtime="$1"
+    local platform="$2"
     local pre_app="$SCRIPT_DIR/pre/.next"
     local post_app="$SCRIPT_DIR/post/.next"
 
     compare_size "$pre_app" "$post_app"
+    record_size "$runtime" "$platform" ""
 }

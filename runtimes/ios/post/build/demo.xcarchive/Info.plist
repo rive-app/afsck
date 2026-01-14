@@ -17,14 +17,14 @@
 		<key>CFBundleVersion</key>
 		<string>1</string>
 		<key>SigningIdentity</key>
-		<string></string>
+		<string>Apple Development: Tyler Nijmeh (67S72V5SF6)</string>
 		<key>Team</key>
-		<string></string>
+		<string>NJ3JMFUNS9</string>
 	</dict>
 	<key>ArchiveVersion</key>
 	<integer>2</integer>
 	<key>CreationDate</key>
-	<date>2025-12-19T19:24:48Z</date>
+	<date>2026-01-14T16:55:15Z</date>
 	<key>Name</key>
 	<string>demo</string>
 	<key>SchemeName</key>
