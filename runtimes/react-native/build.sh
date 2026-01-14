@@ -53,3 +53,12 @@ getsize_android() {
     compare_size "$pre_app" "$post_app"
     record_size "$runtime" "$platform" ""
 }
+
+run_build() {
+    local runtime="$1"
+
+    build pre
+    build post
+    getsize_ios "$runtime" "ios"
+    getsize_android "$runtime" "android"
+}

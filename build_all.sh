@@ -22,11 +22,9 @@ multiplatform_runtimes=(react-native flutter)
 build_runtime() {
     local runtime_dir="$ROOT_DIR/runtimes/$1"
     source "$runtime_dir/build.sh"
-    build pre
-    build post
 
-    # getsize now handles recording internally
-    getsize "$1" "$1"
+    # Runtime handles its own build and size recording
+    run_build "$1" "$1"
 
     cleanup
 }
@@ -34,18 +32,15 @@ build_runtime() {
 build_multiplatform_runtime() {
     local runtime_dir="$ROOT_DIR/runtimes/$1"
     source "$runtime_dir/build.sh"
-    build pre
-    build post
 
-    # getsize_* now handle recording internally
-    getsize_ios "$1" "ios"
-    getsize_android "$1" "android"
+    # Runtime handles its own build and size recording for both platforms
+    run_build "$1"
 
     cleanup
 }
 
 cleanup() {
-    unset -f build getsize getsize_ios getsize_android
+    unset -f run_build build getsize getsize_ios getsize_android
     unset PRE_SIZE POST_SIZE SIZE_DIFF
     unset SCRIPT_DIR
 }

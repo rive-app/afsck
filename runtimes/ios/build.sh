@@ -49,3 +49,12 @@ getsize() {
     compare_size_raw "$pre_size" "$post_size"
     record_size "$runtime" "$platform" "compressed"
 }
+
+run_build() {
+    local runtime="$1"
+    local platform="$2"
+
+    build pre
+    build post
+    getsize "$runtime" "$platform"
+}
