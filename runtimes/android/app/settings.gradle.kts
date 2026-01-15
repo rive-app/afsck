@@ -22,3 +22,8 @@ dependencyResolutionManagement {
 rootProject.name = "demo"
 include(":app")
  
+includeBuild("../../../rive/packages/runtime_android") {
+    dependencySubstitution {
+        substitute(module("app.rive:rive-android")).using(project(":kotlin"))
+    }
+}
