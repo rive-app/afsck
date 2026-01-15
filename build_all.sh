@@ -9,7 +9,6 @@ if [ -z "$ANDROID_HOME" ]; then
 fi
 
 # Source all build scripts.
-source "$SCRIPTS_DIR/build_android.sh"
 source "$SCRIPTS_DIR/build_ios.sh"
 source "$SCRIPTS_DIR/compare_size.sh"
 source "$SCRIPTS_DIR/output_file.sh"
