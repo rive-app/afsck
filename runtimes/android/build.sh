@@ -65,12 +65,12 @@ run_build() {
     local runtime="$1"
     local platform="$2"
 
-    # pushd "$SCRIPT_DIR/app" > /dev/null || exit 1
-    # ./gradlew clean
-    # popd > /dev/null
+    pushd "$SCRIPT_DIR/app" > /dev/null || exit 1
+    ./gradlew clean
+    popd > /dev/null
 
-    # build default
-    # build rive
+    build default
+    build rive
     
     get_and_record_size_for_variant "$runtime" "$platform" "default" "rive" "device_armv7.json" "armv7"
     get_and_record_size_for_variant "$runtime" "$platform" "default" "rive" "device_armv8.json" "armv8"
