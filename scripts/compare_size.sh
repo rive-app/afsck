@@ -12,5 +12,5 @@ compare_size() {
 compare_size_raw() {
     PRE_SIZE=$(( $1 / 1024 ))
     POST_SIZE=$(( $2 / 1024 ))
-    SIZE_DIFF=$((POST_SIZE - PRE_SIZE))
+    SIZE_DIFF=$(( ($2 - $1) / 1024 ))
 }
