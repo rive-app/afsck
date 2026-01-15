@@ -6,9 +6,7 @@ plugins {
 
 android {
     namespace = "com.rive.demo"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk { version = release(36) }
 
     defaultConfig {
         applicationId = "com.rive.demo"
@@ -24,8 +22,8 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
             )
         }
     }
@@ -33,15 +31,19 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
+    kotlinOptions { jvmTarget = "11" }
+    buildFeatures { compose = true }
+
+    flavorDimensions += "rive"
+    productFlavors {
+        create("default") { applicationIdSuffix = ".default" }
+
+        create("rive") { applicationIdSuffix = ".rive" }
     }
 }
 
 dependencies {
+    "riveImplementation"(libs.rive.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
